@@ -20,6 +20,9 @@ namespace object1130
 		/** 魚の名前*/
 		private string[] SAKANA_NAMES = { "グッピー", "メダカ" };
 
+		private CHito[] hitoObjects;
+
+
 		/** 生き物の種類*/
 		private enum IKIMONO_TYPE
 		{
@@ -45,44 +48,20 @@ namespace object1130
 		public Form1()
 		{
 			InitializeComponent();
+
+			//CHito hito = new CHito("デジタルアーツ");
+			//MessageBox.Show(hito.hello());
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			// 数を算出
-			iHitoCount = HITO_NAMES.Length;
-			iToriCount = TORI_NAMES.Length;
-			iSakanaCount = SAKANA_NAMES.Length;
-			iIkimonoCount = iHitoCount + iToriCount + iSakanaCount;
-
-			// 変数の領域を確保
-			names = new string[iIkimonoCount];
-			types = new IKIMONO_TYPE[iIkimonoCount];
-
-			// 人を登録
-			for (int i = 0; i < iHitoCount; i++)
+			hitoObjects = new CHito[HITO_NAMES.Length];
+			for (int i = 0; i < HITO_NAMES.Length; i++)
 			{
-				types[i] = IKIMONO_TYPE.IKIMONO_HITO;
-				names[i] = HITO_NAMES[i];
-				// 名前リストを表示
+				hitoObjects[i] = new CHito(HITO_NAMES[i]);
 				textBox1.AppendText("" + i + ":" + HITO_NAMES[i] + "\r\n");
 			}
-			// 鳥を登録
-			for (int i = 0; i < iToriCount; i++)
-			{
-				types[i + iHitoCount] = IKIMONO_TYPE.IKIMONO_TORI;
-				names[i + iHitoCount] = TORI_NAMES[i];
-				// 名前リストを表示
-				textBox1.AppendText("" + (i + iHitoCount) + ":" + TORI_NAMES[i] + "\r\n");
-			}
-			// 魚を登録
-			for (int i = 0; i < iSakanaCount; i++)
-			{
-				types[i + iHitoCount + iToriCount] = IKIMONO_TYPE.IKIMONO_SAKANA;
-				names[i + iHitoCount + iToriCount] = SAKANA_NAMES[i];
-				// 名前リストを表示
-				textBox1.AppendText("" + (i + iHitoCount + iToriCount) + ":" + SAKANA_NAMES[i] + "\r\n");
-			}
+
 		}
 
 		private void buttonHello_Click(object sender, EventArgs e)
@@ -91,7 +70,7 @@ namespace object1130
 			int index = int.Parse(txtIndex.Text);
 
 			// 挨拶
-			textBox1.AppendText("私は" + names[index] + "です。\r\n");
+			textBox1.AppendText(hitoObjects[index].hello()+"\r\n");
 		}
 
 		private void buttonAction_Click(object sender, EventArgs e)
@@ -100,23 +79,12 @@ namespace object1130
 			int index = int.Parse(txtIndex.Text);
 
 			// 行動
-			switch (types[index])
-			{
-				case IKIMONO_TYPE.IKIMONO_HITO:
-					textBox1.AppendText("テクテク\r\n");
-					break;
-				case IKIMONO_TYPE.IKIMONO_TORI:
-					textBox1.AppendText("パタパタ\r\n");
-					break;
-				case IKIMONO_TYPE.IKIMONO_SAKANA:
-					textBox1.AppendText("スイスイ\r\n");
-					break;
-			}
+			textBox1.AppendText(hitoObjects[index].action()+"\r\n");
 		}
 
 		private void buttonNumber_Click(object sender, EventArgs e)
 		{
-			textBox1.AppendText("人は" + iHitoCount + "人\r\n");
+			textBox1.AppendText("人は" + hitoObjects[0].getCount() + "人\r\n");
 			textBox1.AppendText("鳥は" + iToriCount + "羽\r\n");
 			textBox1.AppendText("魚は" + iSakanaCount + "匹\r\n");
 			textBox1.AppendText("生き物は" + iIkimonoCount + "体。\r\n");
