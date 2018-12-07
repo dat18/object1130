@@ -84,7 +84,7 @@ namespace object1130
 
 		private void buttonNumber_Click(object sender, EventArgs e)
 		{
-			textBox1.AppendText("人は" + hitoObjects[0].getCount() + "人\r\n");
+			textBox1.AppendText("人は" + CHito.getCount() + "人\r\n");
 			textBox1.AppendText("鳥は" + iToriCount + "羽\r\n");
 			textBox1.AppendText("魚は" + iSakanaCount + "匹\r\n");
 			textBox1.AppendText("生き物は" + iIkimonoCount + "体。\r\n");

@@ -8,7 +8,7 @@ namespace object1130
 {
 	class CHito
 	{
-		private int count = 0;
+		private static int count = 0;
 		private string name = "";
 
 		public CHito(string nm)
@@ -17,7 +17,7 @@ namespace object1130
 			count++;
 		}
 
-		public int getCount()
+		public static int getCount()
 		{
 			return count;
 		}
